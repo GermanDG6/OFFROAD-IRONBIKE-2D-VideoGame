@@ -1,0 +1,37 @@
+body{
+    background-image: url('/images/background-img3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+@font-face {
+    font-family:myFont ;
+    src: url(/styles/VehicleBreaksDown-Regular.ttf);
+    font-size: 4em;
+}
+.game-title{
+    font-family: myFont ;
+    color: rgb(196, 104, 0);
+    height: 200px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#canvas{
+    border: 10px solid rgba(71, 31, 15, 0.74)
+}
+
+
+.game{
+    text-align: center;
+}
+.all-buttons{
+margin-left: 10vw;
+}
+.buttons{
+    background-color: rgba(87, 49, 22, 0.726);
+    max-width: 80vw;
+    margin: 10px;
+    text-align: center;
+}
