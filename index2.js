@@ -1,5 +1,6 @@
 
 //CLASES
+
 class LandScape {
   constructor(){
     this.img= ""
@@ -7,7 +8,7 @@ class LandScape {
     this.heigth = ctx.canvas.heigth
     this.x =0
     this.y =0
-    this.speed= -5
+    this.speed= -6
   }
 
   move() {
@@ -23,8 +24,6 @@ class LandScape {
       ctx.drawImage(loadedImages.landScape, this.x - loadedImages.landscape.width, 0,ctx.canvas.width, ctx.canvas.height);
     }
   }
-  
-
 }
 
 
@@ -36,37 +35,42 @@ class Bike {
         this.x = 0
         this.y =310
         this.vx = 0;
-        this.vy= 3;
+        this.vy= 2;
       }
     //METHODS
     drawSelf(){
         ctx.drawImage(loadedImages.bike, this.x, this.y, this.width, this.height)
     }
 
-
     moveLeft(){
-      this.x -= 15
+      this.x -= 18
     }
 
     moveRight(){
-      this.x += 15
+      this.x += 24
     }
+
+    brake(){
+      this.x -= 10.60
+    }
+
     jump() {
+      this.x += 60
       this.vy -= gravity;
       this.y -= this.vy ;
-      this.y -= 120
-      this.x += 30
+      this.y -= 100
       }
   }
 
 
 class Obstacle {
     constructor(){
-        //this.img=""
-        this.width = 150
-        this.heigth = 150
-        this.x = 800
-        this.y = 310
+        this.img=""
+        this.width = 60
+        this.heigth = 60
+        this.x = 1900
+        this.y = 390
+        this.speed= -5
     }
     drawSelf(){
         ctx.fillRect(this.x, this.y, this.width, this.height)  
@@ -74,9 +78,9 @@ class Obstacle {
     }
 
     moveSelf(){
-        this.x -= 15
+        this.x -= 1
+        this.x += this.speed
       }
-
 }
 
     
@@ -96,12 +100,11 @@ class Obstacle {
     let score = 0
 
     let jumping 
-    let gravity = 0.7;
+    let gravity = 0.8;
 
     const landScape = new LandScape()
     const bike = new Bike()
-    //const obstacle  = new Obstacle()
-
+    const obstacle  = new Obstacle()
 
 
 
@@ -115,6 +118,8 @@ class Obstacle {
           bike.moveRight()
         }else if(event.key === 'ArrowLeft'){
           bike.moveLeft()
+        }else if(event.key === 'ArrowDown'){
+          bike.brake()
         }
         if(bike.y>=280){ 
         if(event.key === ' ' ||event.key === 'ArrowUp'){
@@ -132,7 +137,7 @@ class Obstacle {
         updateCanvas()
     }
 
-
+//CARGAR IMAGENES 
   const loadImages = ()=>{
     for(let key in listOfUrls){
       const img = new Image()
@@ -146,19 +151,19 @@ class Obstacle {
       }
     }
   }
-
+// DIBUJAR FONDO
   const drawLandScape = ()=>{
     landScape.drawSelf()
    // ctx.drawImage(loadedImages.landScape, 0, 0, ctx.canvas.width, ctx.canvas.height)
   }
-
+// LOGICA BICI
   const drawBike = ()=>{
     bike.drawSelf()
     ctx.drawImage(loadedImages.bike,bike.x,bike.y,bike.width,bike.heigth)
   }
   const gravityBike = ()=>{
-    if(bike.vy>3){bike.vy=3}
-    if(bike.y<310 && bike.vy<=3){
+    if(bike.vy>2){bike.vy=2}
+    if(bike.y<310 && bike.vy<=2){
       bike.vy += gravity;
       bike.x += bike.vx;
       bike.y += bike.vy ;
@@ -166,6 +171,7 @@ class Obstacle {
       bike.vy = 3;
     }
   }
+  // LIMITES 
   const checkForBoundries = ()=>{
     if(bike.y > 311){
       bike.y = 310
@@ -176,8 +182,14 @@ class Obstacle {
       bike.x = ctx.canvas.width
     }
   }
+  const checkForBoundriesObs = ()=>{
+if(obstacle.x < 0){
+      obstacle.x = Math.random() * (1200 - 900) + 900
+    }
+    console.log(obstacle.x)
+  }
 
-
+//LOGICA OBSTACULOS
   
   let counter = 0;
   const createObstacles = ()=>{
@@ -188,13 +200,12 @@ class Obstacle {
       counter = 0
     }
   }
-
   
   const drawObstacles = ()=>{
+    ctx.drawImage(loadedImages.obstacle,obstacle.x,obstacle.y,obstacle.width,obstacle.heigth)
     arrayOfObstacles.forEach((obstacle)=>{
       obstacle.drawSelf()
     })
-    console.log(arrayOfObstacles)
   }
   
   const moveObstacles = ()=>{
@@ -203,9 +214,36 @@ class Obstacle {
     })
   }
 
+//LIMPIAR CANVAS 
   const clearCanvas = ()=>{
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
   }
+
+  const renderScore = ()=>{
+    ctx.fillText(`Score: ${score}`, 70, 40)
+  }
+
+  const renderGameOverText = ()=>{
+
+    ctx.fillText(`GAME OVER`, ctx.canvas.width / 2, ctx.canvas.height / 2)
+    console.log('game over')
+  }
+
+
+//COMPROBAR COLISION
+
+const checkCollision = ()=>{
+  if( ((Math.round(obstacle.x/6)==Math.round((bike.x+bike.width)/6)) )&&((bike.y+bike.heigth-20)>=obstacle.y)){ 
+    //backgroundAudio.pause()
+    //crashAudio.play()
+    gameOver = true;
+    renderGameOverText()
+  } else {
+    score++
+  }
+  //console.log(obstacle.x,(bike.x+bike.width))
+}
+
   
   
   const updateCanvas = ()=>{
@@ -217,10 +255,12 @@ class Obstacle {
       drawBike()
       createObstacles()
       drawObstacles() 
+      obstacle.moveSelf()
       moveObstacles()
+      checkForBoundriesObs()
       checkForBoundries()
-      //checkCollision()
-      //renderScore()
+      checkCollision()
+      renderScore()
     }
     requestAnimationFrame(updateCanvas)
   }
