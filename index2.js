@@ -68,7 +68,7 @@ class Obstacle {
         this.img=""
         this.width = 60
         this.height = 60
-        this.x = 1900
+        this.x =( (Math.random() * ((ctx.canvas.width + 50)-(ctx.canvas.width/2 ))) + (ctx.canvas.width + 50)) 
         this.y = 390
         this.speed= -5
     }
@@ -87,32 +87,47 @@ class Obstacle {
     const canvas = document.getElementById('canvas')
     const ctx = canvas.getContext('2d')
 
+    let loadedAllImages = false
+    const loadedImages = {} 
+    const listOfUrls = {landScape:'./images/landscape1.jpg', bike:'./images/klipartz.com (2).png', obstacle:'./images/klipartz.com (1).png'}  
+    let counterForLoadedImages = 0
+    
+    const arrayOfObstacles = []
+    
+    let musicAudio, ambientAudio, commentsAudio;
+
+    let score = 0
+    
+    let jumping 
+    let gravity = 0.8;
+    
     let gameOver = false
     let gamePaused = false
 
-    let loadedAllImages = false
-    const loadedImages = {} 
-    const listOfUrls = {landScape:'/images/landscape1.jpg', bike:'images/klipartz.com (2).png', obstacle:'images/klipartz.com (1).png'}  
-    let counterForLoadedImages = 0
-
-    const arrayOfObstacles = []
-
-    let score = 0
-
-    let jumping 
-    let gravity = 0.8;
+    let startclicked = false
 
     const landScape = new LandScape()
     const bike = new Bike()
     const obstacle  = new Obstacle()
-
+    
 
 
 //DOM MANIPULATION 
     document.getElementById('start-button').onclick = () => {
+      if(!startclicked){
         startGame();
+        startclicked = true
     };
-
+  }  
+    document.getElementById('btncheck1').onclick = () => {
+      ;
+    };
+    document.getElementById('btncheck2').onclick = () => {
+    ;
+    };
+    document.getElementById('btncheck3').onclick = () => {
+    ;
+    };
     document.addEventListener('keydown', (event)=>{
         if(event.key === 'ArrowRight'){
           bike.moveRight()
@@ -128,14 +143,17 @@ class Obstacle {
     })
     document.addEventListener('keydown', (event)=>{    
       if(event.key === ' '){
-        pauseGame() }})
+       pauseGame()
+      }})
 
 //GAME LOGIC
     const startGame = ()=>{
         loadImages()
-        //loadAudios()
-        //backgroundAudio.play()
-        updateCanvas()
+        loadAudios()
+        ambientAudio.play()
+        commentsAudio.play()
+        musicAudio.play()
+        updateCanvas() 
     }
 
 //CARGAR IMAGENES 
@@ -151,6 +169,14 @@ class Obstacle {
         }
       }
     }
+  }
+  //CARGAR AUDIOS 
+  const loadAudios = ()=>{
+    musicAudio = new Audio('./sounds/MUSIC-BIKE-GAME.wav')
+    commentsAudio = new Audio('./sounds/COMMENTS-BIKE-GAME.wav')
+    ambientAudio = new Audio('./sounds/AMBIENT-BIKE-GAME.wav')
+//    backgroundAudio.loop = true
+      
   }
 // DIBUJAR FONDO
   const drawLandScape = ()=>{
@@ -224,9 +250,16 @@ class Obstacle {
   }
   function pauseGame() {
     if (!gamePaused) {
+      // musicAudio.pause()
+      // ambientAudio.pause() 
+      // commentsAudio.pause()
       gamePaused = true;
     } else if (gamePaused) {
-      startGame();
+        if(!startclicked){
+        startGame();
+        startclicked = true
+    };
+    
       gamePaused = false;
     }
   }
@@ -265,9 +298,8 @@ const checkCollision = ()=>{
       checkCollision()
       renderScore()
     }
-    requestAnimationFrame(updateCanvas)
   }
-  console.log(gamePaused)
+  requestAnimationFrame(updateCanvas)
 }
 
 
