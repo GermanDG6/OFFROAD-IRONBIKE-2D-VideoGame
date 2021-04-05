@@ -175,7 +175,7 @@ class Obstacle {
     musicAudio = new Audio('./sounds/MUSIC-BIKE-GAME.wav')
     commentsAudio = new Audio('./sounds/COMMENTS-BIKE-GAME.wav')
     ambientAudio = new Audio('./sounds/AMBIENT-BIKE-GAME.wav')
-//    backgroundAudio.loop = true
+//  backgroundAudio.loop = true
       
   }
 // DIBUJAR FONDO
@@ -250,14 +250,14 @@ class Obstacle {
   }
   function pauseGame() {
     if (!gamePaused) {
-      // musicAudio.pause()
+      gamePaused = true;
+      //musicAudio.muted()
       // ambientAudio.pause() 
       // commentsAudio.pause()
-      gamePaused = true;
     } else if (gamePaused) {
         if(!startclicked){
-        startGame();
         startclicked = true
+        startGame();
     };
     
       gamePaused = false;
@@ -304,3 +304,8 @@ const checkCollision = ()=>{
 
 
   window.onload = () => { } 
+
+
+  // soundButton.addEventListener('click', ()=>{
+  //    soundButton.classList.toggle('muted') if (!soundButton.classList.contains('muted')){ 
+  //      backgroundAudio.muted = false splashAudio.muted = false soundOFF.classList.add("display-none") soundON.classList.remove("display-none") }else{ backgroundAudio.muted = true splashAudio.muted = true soundON.classList.add("display-none") soundOFF.classList.remove("display-none") } }) 
