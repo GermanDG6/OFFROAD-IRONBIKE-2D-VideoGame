@@ -41,6 +41,10 @@ class Bike {
     drawSelf(){
         ctx.drawImage(loadedImages.bike, this.x, this.y, this.width, this.height)
     }
+    drawJump(){
+      ctx.drawImage(loadedImages.bikejump, this.x, this.y, this.width, this.height)
+  }
+
 
     moveLeft(){
       this.x -= 18
@@ -89,12 +93,12 @@ class Obstacle {
 
     let loadedAllImages = false
     const loadedImages = {} 
-    const listOfUrls = {landScape:'./images/landscape1.jpg', bike:'./images/klipartz.com (2).png', obstacle:'./images/klipartz.com (1).png'}  
+    const listOfUrls = {landScape:'./images/landscape1.jpg', bike:'./images/klipartz.com (2).png',bikejump:'./images/bici vuelta 1.png', obstacle:'./images/klipartz.com (1).png'}  
     let counterForLoadedImages = 0
     
     const arrayOfObstacles = []
     
-    let musicAudio, ambientAudio, commentsAudio;
+    let musicAudio, ambientAudio, commentsAudio, introAudio;
 
     let score = 0
     
@@ -120,16 +124,38 @@ class Obstacle {
     };
   }  
     document.getElementById('btncheck1').onclick = () => {
-      ;
+      if(!musicAudio.muted){
+        musicAudio.muted= true
+      }else{
+        musicAudio.muted= false
+      }
+      if(!introAudio.muted){
+        introAudio.muted= true
+      }else{
+        introAudio.muted= false
+      }
     };
     document.getElementById('btncheck2').onclick = () => {
-    ;
+      if(!ambientAudio.muted){
+        ambientAudio.muted= true;
+      }else{
+        ambientAudio.muted= false;
+      }
     };
     document.getElementById('btncheck3').onclick = () => {
-    ;
+      if(!commentsAudio.muted){
+        commentsAudio.muted = true;
+      }else{
+        commentsAudio.muted = false;
+      }
     };
+
+    document.getElementById('reload-button').onclick = () => {
+     location.reload()
+    };
+
     document.addEventListener('keydown', (event)=>{
-        if(event.key === 'ArrowRight'){
+      if(event.key === 'ArrowRight'){
           bike.moveRight()
         }else if(event.key === 'ArrowLeft'){
           bike.moveLeft()
@@ -151,8 +177,11 @@ class Obstacle {
         loadImages()
         loadAudios()
         ambientAudio.play()
+        ambientAudio.volume = 0.2
         commentsAudio.play()
+        commentsAudio.volume = 0.2
         musicAudio.play()
+        musicAudio.volume = 0.2
         updateCanvas() 
     }
 
@@ -172,11 +201,10 @@ class Obstacle {
   }
   //CARGAR AUDIOS 
   const loadAudios = ()=>{
+    introAudio = new Audio ('./sounds/MUSIC INTRO BIKE-GAME.wav')
     musicAudio = new Audio('./sounds/MUSIC-BIKE-GAME.wav')
     commentsAudio = new Audio('./sounds/COMMENTS-BIKE-GAME.wav')
-    ambientAudio = new Audio('./sounds/AMBIENT-BIKE-GAME.wav')
-//  backgroundAudio.loop = true
-      
+    ambientAudio = new Audio('./sounds/AMBIENT-BIKE-GAME.wav')      
   }
 // DIBUJAR FONDO
   const drawLandScape = ()=>{
@@ -184,7 +212,10 @@ class Obstacle {
   }
 // LOGICA BICI
   const drawBike = ()=>{
-    bike.drawSelf()
+    if(bike.y<308){
+      bike.drawJump()
+    }else{bike.drawSelf()}
+    
   }
   const gravityBike = ()=>{
     if(bike.vy>2){bike.vy=2}
@@ -198,13 +229,13 @@ class Obstacle {
   }
   // LIMITES 
   const checkForBoundries = ()=>{
-    if(bike.y > 311){
+    if(bike.y > 315){
       bike.y = 310
     }
     if(bike.x > ctx.canvas.width){
       bike.x = 0
     }else if(bike.x < 0){
-      bike.x = ctx.canvas.width
+      bike.x = 0
     }
   }
 
@@ -243,48 +274,63 @@ class Obstacle {
     ctx.fillText(`Score: ${score}`, 70, 40)
   }
 
-  const renderGameOverText = ()=>{
-    ctx.fillText(`GAME OVER`, ctx.canvas.width / 2, ctx.canvas.height / 2)
-    ctx.font = '30px Arial';
-    console.log('game over')
-  }
   function pauseGame() {
     if (!gamePaused) {
       gamePaused = true;
-      //musicAudio.muted()
-      // ambientAudio.pause() 
-      // commentsAudio.pause()
     } else if (gamePaused) {
-        if(!startclicked){
+      if(!startclicked){
         startclicked = true
         startGame();
-    };
-    
+      };
+      
       gamePaused = false;
     }
   }
-
-//COMPROBAR COLISION
-
-const checkCollision = ()=>{
-  arrayOfObstacles.forEach((obstacle)=>{
-  if( ((Math.round(obstacle.x/6)==Math.round((bike.x+bike.width)/6)) )&&((bike.y+bike.height-20)>=obstacle.y)){ 
-    //backgroundAudio.pause()
-    //crashAudio.play()
-    gameOver = true;
-    renderGameOverText()
-    score-=3000;
-  } else {
-    score++
+  
+  //COMPROBAR COLISION
+  
+  const checkCollision = ()=>{
+    arrayOfObstacles.forEach((obstacle,index)=>{
+      if( ((Math.round(obstacle.x/6)==Math.round((bike.x+bike.width)/6)) )&&((bike.y+bike.height-20)>=obstacle.y)){ 
+        score-=15000;
+        arrayOfObstacles.splice(index,1)
+      }
+    })
   }
-})
-}
 
+  const renderGameOverText = ()=>{
+    ctx.fillText(`Game Over`, (ctx.canvas.width / 2)-90, ctx.canvas.height / 2)
+    ctx.font = '180px Arial';
+    console.log('Game Over')
+  }
+
+  const checkPassed =()=>{
+    arrayOfObstacles.forEach((obstacle,index)=>{
+      console.log(obstacle.x)
+      if(obstacle.x<=0){
+        score+=5000
+        arrayOfObstacles.splice(index,1)
+      }
+    })
+  }
+  
+  const checkScore = ()=>{
+    if(score < 0){
+      gameOver = true
+      ambientAudio.pause()
+      commentsAudio.pause()
+      musicAudio.pause()
+      introAudio.play()
+      introAudio.loop = true
+      introAudio.volume = 0.2
+      renderGameOverText()
+    }
+  }
   
   
   const updateCanvas = ()=>{
     if(!gamePaused){
-    if(loadedAllImages ){
+    if(loadedAllImages && !gameOver){
       landScape.move()
       clearCanvas()
       drawLandScape()
@@ -292,11 +338,12 @@ const checkCollision = ()=>{
       drawBike()
       createObstacles()
       drawObstacles() 
-      obstacle.moveSelf()
       moveObstacles()
       checkForBoundries()
       checkCollision()
+      checkPassed()
       renderScore()
+      checkScore()
     }
   }
   requestAnimationFrame(updateCanvas)
@@ -306,6 +353,3 @@ const checkCollision = ()=>{
   window.onload = () => { } 
 
 
-  // soundButton.addEventListener('click', ()=>{
-  //    soundButton.classList.toggle('muted') if (!soundButton.classList.contains('muted')){ 
-  //      backgroundAudio.muted = false splashAudio.muted = false soundOFF.classList.add("display-none") soundON.classList.remove("display-none") }else{ backgroundAudio.muted = true splashAudio.muted = true soundON.classList.add("display-none") soundOFF.classList.remove("display-none") } }) 
