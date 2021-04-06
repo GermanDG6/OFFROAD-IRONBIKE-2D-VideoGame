@@ -1,7 +1,7 @@
 
 .background{
     width: 100vw;
-    height: 85vh;
+    height: 90vh;
     background-image: url('/images/background-img3.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -13,7 +13,7 @@
 }
 .game-title{
     margin: auto;
-    height: 15vh;
+    height: 10vh;
     width: 100vh;
     font-family: myFont ;
     color: rgb(196, 104, 0); 
@@ -24,8 +24,8 @@
 
 
 #canvas{
-    margin: 80px;
-    border: 10px solid rgba(71, 31, 15, 0.74)
+    margin: 30px;
+    border: 1px solid rgba(71, 31, 15, 0.74)
 }
 
 
@@ -33,13 +33,33 @@
     text-align: center;
 }
 .all-buttons{
-    width: 100vw;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+.buttons{    
+    background-color: rgba(87, 49, 22, 0.726);
+    text-align: center;
+}
+h5{
+    color: whitesmoke;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+#time-out{
+    color:whitesmoke;
+    font-size: 30px;
+    height: 8vh;
     display:flex;
     justify-content: center;
+    align-items: center;
 }
-.buttons{
-    background-color: rgba(87, 49, 22, 0.726);
-    max-width: 60vw;
-    margin: 10px;
-    text-align: center;
+#countdown{
+    background-color: rgba(0, 0, 0, 0.452);
+}
+#modal{
+display: flex;
+justify-content: center;
 }

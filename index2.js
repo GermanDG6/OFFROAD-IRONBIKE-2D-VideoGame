@@ -43,8 +43,13 @@ class Bike {
     }
     drawJump(){
       ctx.drawImage(loadedImages.bikejump, this.x, this.y, this.width, this.height)
-  }
-
+    }
+    drawSelfDh(){
+      ctx.drawImage(loadedImages.bike2, this.x, this.y, this.width, this.height)
+    }
+    drawJumpDh(){
+      ctx.drawImage(loadedImages.bikejump2, this.x, this.y, this.width, this.height)
+    }
 
     moveLeft(){
       this.x -= 18
@@ -79,7 +84,8 @@ class Obstacle {
     drawSelf(){
         ctx.drawImage(loadedImages.obstacle, this.x, this.y, this.width, this.height)
     }
-
+                    //numero random entre 0 y 10
+                    //(Math.floor(Math.random())* 10)
     moveSelf(){
         this.x -= 1
         this.x += this.speed
@@ -93,7 +99,7 @@ class Obstacle {
 
     let loadedAllImages = false
     const loadedImages = {} 
-    const listOfUrls = {landScape:'./images/landscape1.jpg', bike:'./images/klipartz.com (2).png',bikejump:'./images/bici vuelta 1.png', obstacle:'./images/klipartz.com (1).png'}  
+    const listOfUrls = {landScape:'./images/landscape1.jpg', bike:'./images/klipartz.com (2).png',bikejump:'./images/bici vuelta 1.png',bike2:'./images/bici dh plana.png',bikejump2:'./images/bici dh vuelta.png' ,obstacle:'./images/klipartz.com (1).png'}  
     let counterForLoadedImages = 0
     
     const arrayOfObstacles = []
@@ -102,27 +108,32 @@ class Obstacle {
 
     let score = 0
     
-    let jumping 
+    let volume 
     let gravity = 0.8;
     
     let gameOver = false
     let gamePaused = false
-
+    let totalTime = 150
     let startclicked = false
 
     const landScape = new LandScape()
     const bike = new Bike()
-    const obstacle  = new Obstacle()
+  
     
 
 
-//DOM MANIPULATION 
+    //DOM MANIPULATION 
     document.getElementById('start-button').onclick = () => {
       if(!startclicked){
         startGame();
         startclicked = true
+      };
+    };  
+
+    document.getElementById('reload-button').onclick = () => {
+     location.reload()
     };
-  }  
+
     document.getElementById('btncheck1').onclick = () => {
       if(!musicAudio.muted){
         musicAudio.muted= true
@@ -150,9 +161,25 @@ class Obstacle {
       }
     };
 
-    document.getElementById('reload-button').onclick = () => {
-     location.reload()
-    };
+    document.getElementById('vol-low').onclick = () => {
+      musicAudio.volume = 0.1
+      commentsAudio.volume = 0.1
+      ambientAudio.volume = 0.1
+      introAudio.volume = 0.1
+     };
+     document.getElementById('vol-mid').onclick = () => {
+      musicAudio.volume = 0.5
+      commentsAudio.volume = 0.5
+      ambientAudio.volume= 0.5
+      introAudio.volume = 0.5
+     };
+     document.getElementById('vol-high').onclick = () => {
+      musicAudio.volume = 1
+      commentsAudio.volume = 1
+      ambientAudio.volume = 1
+      introAudio.volume = 1
+     };
+
 
     document.addEventListener('keydown', (event)=>{
       if(event.key === 'ArrowRight'){
@@ -172,16 +199,15 @@ class Obstacle {
        pauseGame()
       }})
 
+ 
 //GAME LOGIC
     const startGame = ()=>{
         loadImages()
         loadAudios()
         ambientAudio.play()
-        ambientAudio.volume = 0.2
         commentsAudio.play()
-        commentsAudio.volume = 0.2
         musicAudio.play()
-        musicAudio.volume = 0.2
+        updateClock()
         updateCanvas() 
     }
 
@@ -212,9 +238,14 @@ class Obstacle {
   }
 // LOGICA BICI
   const drawBike = ()=>{
+    if(score<600){
     if(bike.y<308){
       bike.drawJump()
-    }else{bike.drawSelf()}
+    }else{bike.drawSelf()}}
+    if(score>=600){
+    if(bike.y<308){
+      bike.drawJumpDh()
+    }else{bike.drawSelfDh()}}
     
   }
   const gravityBike = ()=>{
@@ -245,11 +276,38 @@ class Obstacle {
   let counter = 0;
   const createObstacles = ()=>{
     counter++;
-    if(counter === 80){
+    if(score<150){
+      if(counter >= 150){
       const obstacle = new Obstacle()
       arrayOfObstacles.push(obstacle)
       counter = 0
-    }
+    }}
+    if(150<=score && score<300){
+      if(counter >= 75){
+        const obstacle = new Obstacle()
+        arrayOfObstacles.push(obstacle)
+        counter = 0
+      }}
+    if(300<=score && score<600){
+      if(counter >= 60){
+        const obstacle = new Obstacle()
+        arrayOfObstacles.push(obstacle)
+        counter = 0
+      }}
+    if(600<=score && score<1200){
+        if(counter >= 50){
+          const obstacle = new Obstacle()
+          arrayOfObstacles.push(obstacle)
+          counter = 0
+        }}
+    if(1200<=score){
+        if(counter >= 25){
+            const obstacle = new Obstacle()
+            arrayOfObstacles.push(obstacle)
+            counter = 0
+        }}    
+      
+
   }
   
   const drawObstacles = ()=>{
@@ -275,9 +333,15 @@ class Obstacle {
   }
 
   function pauseGame() {
-    if (!gamePaused) {
+    if (!gamePaused) { 
       gamePaused = true;
+      ambientAudio.muted= true;
+      commentsAudio.muted = true;
+      musicAudio.muted= true;
     } else if (gamePaused) {
+      ambientAudio.muted= false;
+      commentsAudio.muted = false;
+      musicAudio.muted= false
       if(!startclicked){
         startclicked = true
         startGame();
@@ -286,34 +350,48 @@ class Obstacle {
       gamePaused = false;
     }
   }
+  //CUENTA ATRAS
+  function updateClock() {
+    document.getElementById('countdown').innerHTML = `TIME OUT:${totalTime}`;
+    if(!gameOver){
+    if(totalTime==0){
+      document.getElementById('countdown').innerHTML = 'FINAL' 
+      document.getElementById('countdown').innerHTML = `YOUR SCORE :${score}`
+      pauseGame()
+      ambientAudio.pause()
+      commentsAudio.pause()
+    }else{
+      totalTime-=1;
+      setTimeout("updateClock()",1000);
+    }}else{
+      totalTime = 0
+    }
+  }
   
   //COMPROBAR COLISION
   
   const checkCollision = ()=>{
     arrayOfObstacles.forEach((obstacle,index)=>{
       if( ((Math.round(obstacle.x/6)==Math.round((bike.x+bike.width)/6)) )&&((bike.y+bike.height-20)>=obstacle.y)){ 
-        score-=15000;
+        score-=150;
         arrayOfObstacles.splice(index,1)
       }
     })
   }
 
-  const renderGameOverText = ()=>{
-    ctx.fillText(`Game Over`, (ctx.canvas.width / 2)-90, ctx.canvas.height / 2)
-    ctx.font = '180px Arial';
-    console.log('Game Over')
-  }
-
   const checkPassed =()=>{
     arrayOfObstacles.forEach((obstacle,index)=>{
-      console.log(obstacle.x)
       if(obstacle.x<=0){
-        score+=5000
+        score+=50
         arrayOfObstacles.splice(index,1)
       }
     })
   }
   
+  const renderGameOverText = ()=>{
+    ctx.fillText(`GAME OVER`, (ctx.canvas.width / 2)-90, ctx.canvas.height / 2)
+    ctx.font = '300px Arial';
+  }
   const checkScore = ()=>{
     if(score < 0){
       gameOver = true
@@ -322,7 +400,6 @@ class Obstacle {
       musicAudio.pause()
       introAudio.play()
       introAudio.loop = true
-      introAudio.volume = 0.2
       renderGameOverText()
     }
   }
