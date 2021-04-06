@@ -91,7 +91,7 @@ class Obstacle {
     drawTronco2(){
       ctx.drawImage(loadedImages.obstacle3, this.x, this.y, this.width, this.height)
     } 
-    drawFogata(){
+    drawFogata(){ 
       ctx.drawImage(loadedImages.obstacle4, this.x, this.y, this.width+20, this.height)
     }   
     drawValla(){
