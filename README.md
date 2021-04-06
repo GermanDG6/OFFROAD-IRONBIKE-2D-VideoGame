@@ -16,6 +16,8 @@
   
   Los controles son : 
   Arriba: Saltar  //  Derecha: Avanzar  //  Abajo: Frenar  //  Izquierda: Retroceder  //  Espacio: Pausar/Reanudar
+  
+  
   ![Arrows-Keys](https://w7.pngwing.com/pngs/83/537/png-transparent-computer-keyboard-arrow-keys-computer-icons-page-up-and-page-down-keys-arrow-text-rectangle-logo-thumbnail.png)
   
   
