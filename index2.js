@@ -1,4 +1,4 @@
-
+//window.onload = () => { 
 //CLASES
 
 class LandScape {
@@ -80,16 +80,28 @@ class Obstacle {
         this.x =( (Math.random() * ((ctx.canvas.width + 50)-(ctx.canvas.width/2 ))) + (ctx.canvas.width + 50)) 
         this.y = 390
         this.speed= -5
+        this.randomImg = Math.floor(Math.random()* 5)                 
     }
     drawSelf(){
         ctx.drawImage(loadedImages.obstacle, this.x, this.y, this.width, this.height)
     }
-                    //numero random entre 0 y 10
-                    //(Math.floor(Math.random())* 10)
+    drawTronco(){
+      ctx.drawImage(loadedImages.obstacle2, this.x, this.y, this.width, this.height)
+    }    
+    drawTronco2(){
+      ctx.drawImage(loadedImages.obstacle3, this.x, this.y, this.width, this.height)
+    } 
+    drawFogata(){
+      ctx.drawImage(loadedImages.obstacle4, this.x, this.y, this.width+20, this.height)
+    }   
+    drawValla(){
+      ctx.drawImage(loadedImages.obstacle5, this.x, this.y, this.width, this.height)
+     }
+
     moveSelf(){
         this.x -= 1
         this.x += this.speed
-      }
+    }
 }
 
     
@@ -99,7 +111,8 @@ class Obstacle {
 
     let loadedAllImages = false
     const loadedImages = {} 
-    const listOfUrls = {landScape:'./images/landscape1.jpg', bike:'./images/klipartz.com (2).png',bikejump:'./images/bici vuelta 1.png',bike2:'./images/bici dh plana.png',bikejump2:'./images/bici dh vuelta.png' ,obstacle:'./images/klipartz.com (1).png'}  
+    const listOfUrls = {landScape:'./images/landscape1.jpg', bike:'./images/klipartz.com (2).png',bikejump:'./images/bici vuelta 1.png',bike2:'./images/bici dh plana.png',bikejump2:'./images/bici dh vuelta.png' ,obstacle:'./images/klipartz.com (1).png',obstacle2:'./images/tronco1.png',obstacle3:'./images/tronco2.png',obstacle4:'./images/fogata.png',obstacle5:'./images/valla-1.png'}  
+
     let counterForLoadedImages = 0
     
     const arrayOfObstacles = []
@@ -310,9 +323,23 @@ class Obstacle {
 
   }
   
-  const drawObstacles = ()=>{
+  const drawObstacles = ()=>{  
     arrayOfObstacles.forEach((obstacle)=>{
-      obstacle.drawSelf()
+      if(obstacle.randomImg==0){
+        obstacle.drawSelf()
+      }
+      if(obstacle.randomImg==1){
+        obstacle.drawTronco()
+        }
+      if(obstacle.randomImg==2){
+        obstacle.drawTronco2()
+      }
+      if(obstacle.randomImg==3){
+         obstacle.drawFogata()
+      }
+      if(obstacle.randomImg==4){
+        obstacle.drawValla()
+      }
     })
   }
   
@@ -355,7 +382,6 @@ class Obstacle {
     document.getElementById('countdown').innerHTML = `TIME OUT:${totalTime}`;
     if(!gameOver){
     if(totalTime==0){
-      document.getElementById('countdown').innerHTML = 'FINAL' 
       document.getElementById('countdown').innerHTML = `YOUR SCORE :${score}`
       pauseGame()
       ambientAudio.pause()
@@ -427,6 +453,6 @@ class Obstacle {
 }
 
 
-  window.onload = () => { } 
+//} 
 
 
