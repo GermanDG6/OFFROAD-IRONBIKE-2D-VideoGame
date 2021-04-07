@@ -4,7 +4,7 @@
 
     let loadedAllImages = false
     const loadedImages = {} 
-    const listOfUrls = {landScape:'./images/landscape1.jpg', bike:'./images/klipartz.com (2).png',bikejump:'./images/bici vuelta 1.png',bike2:'./images/bici dh plana.png',bikejump2:'./images/bici dh vuelta.png' ,obstacle:'./images/klipartz.com (1).png',obstacle2:'./images/tronco1.png',obstacle3:'./images/tronco2.png',obstacle4:'./images/fogata.png',obstacle5:'./images/valla-1.png'}  
+    const listOfUrls = {landScape:'/images/landscape.jpg', bike:'./images/klipartz.com (2).png',bikejump:'./images/bici vuelta 1.png',bike2:'./images/bici dh plana.png',bikejump2:'./images/bici dh vuelta.png' ,obstacle:'./images/klipartz.com (1).png',obstacle2:'./images/tronco1.png',obstacle3:'./images/tronco2.png',obstacle4:'./images/fogata.png',obstacle5:'./images/valla-1.png'}  
 
     let counterForLoadedImages = 0
     
@@ -21,8 +21,6 @@
     let gamePaused = false
     let totalTime = 150
     let startclicked = false
-
-    let framePerSec
 
     const landScape = new LandScape()
     const bike = new Bike()
@@ -219,6 +217,8 @@
     ctx.fillStyle='rgb(196, 104, 0)'
     ctx.fillText(`GAME OVER`, (ctx.canvas.width / 2)-240, ctx.canvas.height / 2)
   }
+
+
   const checkScore = ()=>{
     if(score < 0){
       gameOver = true
