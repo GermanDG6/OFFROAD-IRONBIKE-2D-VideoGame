@@ -22,7 +22,10 @@
     justify-content: center;
     align-items: center;
 }
-
+.game-title a{
+    text-decoration: none;
+    color: inherit;
+}
 
 #canvas{
     margin: 30px;
@@ -40,10 +43,12 @@
     margin: 20px;
 }
 .buttons{    
+    font-family: MyFont;
     background-color: rgba(87, 49, 22, 0.726);
     text-align: center;
 }
 h5{
+    font-family: MyFont;
     color: whitesmoke;
     display: flex;
     align-items: center;
@@ -51,6 +56,7 @@ h5{
 }
 #time-out{
     color:whitesmoke;
+    font-family: MyFont;
     font-size: 30px;
     height: 8vh;
     display:flex;
@@ -64,7 +70,9 @@ h5{
 display: flex;
 justify-content: center;
 }
-
+.modal{
+    font-family: MyFont;
+}
 .arrows{
     background-image: url('/images/arrows.png');
     background-repeat:no-repeat;

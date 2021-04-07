@@ -1,110 +1,3 @@
-//window.onload = () => { 
-//CLASES
-
-class LandScape {
-  constructor(){
-    this.img= ""
-    this.width = ctx.canvas.width
-    this.height = ctx.canvas.height
-    this.x =0
-    this.y =0
-    this.speed= -6
-  }
-
-  move() {
-    this.x += this.speed;
-    this.x %= canvas.width;
-  }
-  drawSelf(){
-  ctx.drawImage(loadedImages.landScape, this.x, 0, ctx.canvas.width, ctx.canvas.height)
-  
-    if (this.speed < 0) {
-      ctx.drawImage(loadedImages.landScape, this.x + ctx.canvas.width, 0,ctx.canvas.width, ctx.canvas.height);
-    } else {
-      ctx.drawImage(loadedImages.landScape, this.x - loadedImages.landscape.width, 0,ctx.canvas.width, ctx.canvas.height);
-    }
-  }
-}
-
-
-class Bike {
-    constructor(){
-        this.img= ""
-        this.width = 150
-        this.height = 150
-        this.x = 0
-        this.y =310
-        this.vx = 0;
-        this.vy= 2;
-      }
-    //METHODS
-    drawSelf(){
-        ctx.drawImage(loadedImages.bike, this.x, this.y, this.width, this.height)
-    }
-    drawJump(){
-      ctx.drawImage(loadedImages.bikejump, this.x, this.y, this.width, this.height)
-    }
-    drawSelfDh(){
-      ctx.drawImage(loadedImages.bike2, this.x, this.y, this.width, this.height)
-    }
-    drawJumpDh(){
-      ctx.drawImage(loadedImages.bikejump2, this.x, this.y, this.width, this.height)
-    }
-
-    moveLeft(){
-      this.x -= 18
-    }
-
-    moveRight(){
-      this.x += 24
-    }
-
-    brake(){
-      this.x -= 10.60
-    }
-
-    jump() {
-      this.x += 60
-      this.vy -= gravity;
-      this.y -= this.vy ;
-      this.y -= 100
-      }
-  }
-
-
-class Obstacle {
-    constructor(){
-        this.img=""
-        this.width = 60
-        this.height = 60
-        this.x =( (Math.random() * ((ctx.canvas.width + 50)-(ctx.canvas.width/2 ))) + (ctx.canvas.width + 50)) 
-        this.y = 390
-        this.speed= -5
-        this.randomImg = Math.floor(Math.random()* 5)                 
-    }
-    drawSelf(){
-        ctx.drawImage(loadedImages.obstacle, this.x, this.y, this.width, this.height)
-    }
-    drawTronco(){
-      ctx.drawImage(loadedImages.obstacle2, this.x, this.y, this.width, this.height)
-    }    
-    drawTronco2(){
-      ctx.drawImage(loadedImages.obstacle3, this.x, this.y, this.width, this.height)
-    } 
-    drawFogata(){ 
-      ctx.drawImage(loadedImages.obstacle4, this.x, this.y, this.width+20, this.height)
-    }   
-    drawValla(){
-      ctx.drawImage(loadedImages.obstacle5, this.x, this.y, this.width, this.height)
-     }
-
-    moveSelf(){
-        this.x -= 1
-        this.x += this.speed
-    }
-}
-
-    
 // VARIABLES 
     const canvas = document.getElementById('canvas')
     const ctx = canvas.getContext('2d')
@@ -132,87 +25,6 @@ class Obstacle {
     const landScape = new LandScape()
     const bike = new Bike()
   
-    
-
-
-    //DOM MANIPULATION 
-    document.getElementById('start-button').onclick = () => {
-      if(!startclicked){
-        startGame();
-        startclicked = true
-      };
-    };  
-
-    document.getElementById('reload-button').onclick = () => {
-     location.reload()
-    };
-
-    document.getElementById('btncheck1').onclick = () => {
-      if(!musicAudio.muted){
-        musicAudio.muted= true
-      }else{
-        musicAudio.muted= false
-      }
-      if(!introAudio.muted){
-        introAudio.muted= true
-      }else{
-        introAudio.muted= false
-      }
-    };
-    document.getElementById('btncheck2').onclick = () => {
-      if(!ambientAudio.muted){
-        ambientAudio.muted= true;
-      }else{
-        ambientAudio.muted= false;
-      }
-    };
-    document.getElementById('btncheck3').onclick = () => {
-      if(!commentsAudio.muted){
-        commentsAudio.muted = true;
-      }else{
-        commentsAudio.muted = false;
-      }
-    };
-
-    document.getElementById('vol-low').onclick = () => {
-      musicAudio.volume = 0.1
-      commentsAudio.volume = 0.1
-      ambientAudio.volume = 0.1
-      introAudio.volume = 0.1
-     };
-     document.getElementById('vol-mid').onclick = () => {
-      musicAudio.volume = 0.5
-      commentsAudio.volume = 0.5
-      ambientAudio.volume= 0.5
-      introAudio.volume = 0.5
-     };
-     document.getElementById('vol-high').onclick = () => {
-      musicAudio.volume = 1
-      commentsAudio.volume = 1
-      ambientAudio.volume = 1
-      introAudio.volume = 1
-     };
-
-
-    document.addEventListener('keydown', (event)=>{
-      if(event.key === 'ArrowRight'){
-          bike.moveRight()
-        }else if(event.key === 'ArrowLeft'){
-          bike.moveLeft()
-        }else if(event.key === 'ArrowDown'){
-          bike.brake()
-        }
-        if(bike.y>=280){ 
-        if(event.key === 'ArrowUp'){
-          bike.jump()
-        }}
-    })
-    document.addEventListener('keydown', (event)=>{    
-      if(event.key === ' '){
-       pauseGame()
-      }})
-
- 
 //GAME LOGIC
     const startGame = ()=>{
         loadImages()
@@ -220,6 +32,7 @@ class Obstacle {
         ambientAudio.play()
         commentsAudio.play()
         musicAudio.play()
+        musicAudio.loop = true
         updateClock()
         updateCanvas() 
     }
@@ -355,7 +168,8 @@ class Obstacle {
   }
 
   const renderScore = ()=>{
-    ctx.font = '30px Arial';
+    ctx.font = '30px myFont';
+    ctx.fillStyle = 'rgb(196, 104, 0)' 
     ctx.fillText(`Score: ${score}`, 70, 40)
   }
 
@@ -375,22 +189,6 @@ class Obstacle {
       };
       
       gamePaused = false;
-    }
-  }
-  //CUENTA ATRAS
-  function updateClock() {
-    document.getElementById('countdown').innerHTML = `TIME OUT:${totalTime}`;
-    if(!gameOver){
-    if(totalTime==0){
-      document.getElementById('countdown').innerHTML = `YOUR SCORE :${score}`
-      pauseGame()
-      ambientAudio.pause()
-      commentsAudio.pause()
-    }else{
-      totalTime-=1;
-      setTimeout("updateClock()",1000);
-    }}else{
-      totalTime = 0
     }
   }
   
@@ -415,8 +213,9 @@ class Obstacle {
   }
   
   const renderGameOverText = ()=>{
-    ctx.fillText(`GAME OVER`, (ctx.canvas.width / 2)-90, ctx.canvas.height / 2)
-    ctx.font = '300px Arial';
+    ctx.font = '80px myFont';
+    ctx.fillStyle='rgb(196, 104, 0)'
+    ctx.fillText(`GAME OVER`, (ctx.canvas.width / 2)-240, ctx.canvas.height / 2)
   }
   const checkScore = ()=>{
     if(score < 0){
@@ -429,7 +228,23 @@ class Obstacle {
       renderGameOverText()
     }
   }
-  
+
+  //CUENTA ATRAS
+  function updateClock() {
+    document.getElementById('countdown').innerHTML = `TIME OUT : ${totalTime}`;
+    if(!gameOver){
+    if(totalTime==0){
+      document.getElementById('countdown').innerHTML = `YOUR SCORE :${score}`
+      pauseGame()
+      ambientAudio.pause()
+      commentsAudio.pause()
+    }else{
+      totalTime-=1;
+      setTimeout("updateClock()",1000);
+    }}else{
+      totalTime = 0
+    }
+  }
   
   const updateCanvas = ()=>{
     if(!gamePaused){
@@ -453,6 +268,6 @@ class Obstacle {
 }
 
 
-//} 
+
 
 
