@@ -10,7 +10,7 @@
 -Bootstrap
 
 ### Instrucciones 
-  El juego simula que eres un cilicsta profesional de montaña, para ello entrena tus reflejos. Tienes que evitar los obstaculos que te vas encontrando en el camino, durante el tiempo que dura la carrera: 150 segundos. Si consigues esquivar los obstaculos sumarás 50 puntos por cada uno, en cambio, si chocas la rueda delantera con alguno de los obstáculos, perderás 150 puntos. Si tus puntos se vuelven negativos, significará que has sufrido una caída, por lo que se acaba la partida. El reto consiste en acumular el máximo de puntos, para ser el número 1!
+  El juego simula que eres un ciclista profesional de montaña, para ello entrena tus reflejos. Tienes que evitar los obstaculos que te vas encontrando en el camino, durante el tiempo que dura la carrera: 150 segundos. Si consigues esquivar los obstaculos sumarás 50 puntos por cada uno, en cambio, si chocas la rueda delantera con alguno de los obstáculos, perderás 150 puntos. Si tus puntos se vuelven negativos, significará que has sufrido una caída, por lo que se acaba la partida. El reto consiste en acumular el máximo de puntos, para ser el número 1!
   
   A medida que tu puntuación aumenta, también lo hace la dificultad, lo que nos provoca ser constantes y resistir para terminar con nuestra máxima puntuación. Por encima de 600 puntos, consigues estar visible para los patrocinadores, quienes nos proporcionan una bicicleta mejor, si pierdes la puntuación y bajas de 600 puntos, terminarás con la bicicleta por defecto. No pierdas tu oportunidad! 
   

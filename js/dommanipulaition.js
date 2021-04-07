@@ -1,3 +1,4 @@
+window.onload = () => {
     //DOM MANIPULATION 
     document.getElementById('start-button').onclick = () => {
         if(!startclicked){
@@ -74,3 +75,4 @@
         if(event.key === ' '){
          pauseGame()
         }})
+}

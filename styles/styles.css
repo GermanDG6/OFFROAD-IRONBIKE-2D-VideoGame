@@ -1,3 +1,8 @@
+@font-face {
+    font-family:myFont ;
+    src: url('/styles/VehicleBreaksDown-Regular.ttf');
+    font-size: 120px;
+}
 
 .background{
     width: 100vw;
@@ -5,12 +10,8 @@
     background-image: url('/images/background-img3.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-}
-@font-face {
-    font-family:myFont ;
-    src: url('/styles/VehicleBreaksDown-Regular.ttf');
-    font-size: 120px;
-}
+}  
+
 .game-title{
     margin: auto;
     height: 10vh;
@@ -26,16 +27,14 @@
     text-decoration: none;
     color: inherit;
 }
-
+.game{
+    text-align: center;
+}
 #canvas{
     margin: 30px;
     border: 1px solid rgba(71, 31, 15, 0.74)
 }
 
-
-.game{
-    text-align: center;
-}
 .all-buttons{
     display:flex;
     flex-direction: column;
@@ -47,6 +46,7 @@
     background-color: rgba(87, 49, 22, 0.726);
     text-align: center;
 }
+
 h5{
     font-family: MyFont;
     color: whitesmoke;
@@ -54,6 +54,7 @@ h5{
     align-items: center;
     margin-top: 10px;
 }
+
 #time-out{
     color:whitesmoke;
     font-family: MyFont;
@@ -66,16 +67,21 @@ h5{
 #countdown{
     background-color: rgba(0, 0, 0, 0.452);
 }
+
 #modal{
 display: flex;
 justify-content: center;
 }
+.modal-title{
+    font-size:35px;
+}
 .modal{
     font-family: MyFont;
+    font-size: 20px;
 }
 .arrows{
     background-image: url('/images/arrows.png');
     background-repeat:no-repeat;
     background-position-x: right;
-    background-size: 150px;
+    background-size: 160px;
 }

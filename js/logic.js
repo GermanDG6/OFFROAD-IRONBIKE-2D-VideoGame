@@ -22,9 +22,11 @@
     let totalTime = 150
     let startclicked = false
 
+    let framePerSec
+
     const landScape = new LandScape()
     const bike = new Bike()
-  
+
 //GAME LOGIC
     const startGame = ()=>{
         loadImages()
@@ -211,7 +213,7 @@
       }
     })
   }
-  
+
   const renderGameOverText = ()=>{
     ctx.font = '80px myFont';
     ctx.fillStyle='rgb(196, 104, 0)'
@@ -245,7 +247,7 @@
       totalTime = 0
     }
   }
-  
+
   const updateCanvas = ()=>{
     if(!gamePaused){
     if(loadedAllImages && !gameOver){
@@ -266,8 +268,3 @@
   }
   requestAnimationFrame(updateCanvas)
 }
-
-
-
-
-

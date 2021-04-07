@@ -12,13 +12,14 @@ class LandScape {
       this.x += this.speed;
       this.x %= canvas.width;
     }
+
     drawSelf(){
-    ctx.drawImage(loadedImages.landScape, this.x, 0, ctx.canvas.width, ctx.canvas.height)
+         ctx.drawImage(loadedImages.landScape, this.x, 0, ctx.canvas.width, ctx.canvas.height)
     
       if (this.speed < 0) {
-        ctx.drawImage(loadedImages.landScape, this.x + ctx.canvas.width, 0,ctx.canvas.width, ctx.canvas.height);
+        ctx.drawImage(loadedImages.landScape, this.x + ctx.canvas.width, 0,ctx.canvas.width, ctx.canvas.height)
       } else {
-        ctx.drawImage(loadedImages.landScape, this.x - loadedImages.landscape.width, 0,ctx.canvas.width, ctx.canvas.height);
+        ctx.drawImage(loadedImages.landScape, this.x - loadedImages.landscape.width, 0,ctx.canvas.width, ctx.canvas.height)
       }
     }
   }
@@ -100,4 +101,3 @@ class LandScape {
           this.x += this.speed
       }
   }
-  
