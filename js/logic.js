@@ -241,7 +241,8 @@
       ambientAudio.pause()
       commentsAudio.pause()
     }else{
-      totalTime-=1;
+      if(!gamePaused){
+      totalTime-=1;}
       setTimeout("updateClock()",1000);
     }}else{
       totalTime = 0
