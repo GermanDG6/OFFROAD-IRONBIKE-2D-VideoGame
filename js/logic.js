@@ -53,10 +53,10 @@
   }
   //CARGAR AUDIOS 
   const loadAudios = ()=>{
-    introAudio = new Audio ('./sounds/MUSIC INTRO BIKE-GAME.wav')
-    musicAudio = new Audio('./sounds/MUSIC-BIKE-GAME.wav')
-    commentsAudio = new Audio('./sounds/COMMENTS-BIKE-GAME.wav')
-    ambientAudio = new Audio('./sounds/AMBIENT-BIKE-GAME.wav')      
+    introAudio = new Audio ('./sounds/INTRO-MUSIC-BIKE-GAME.mp3')
+    musicAudio = new Audio('./sounds/MUSIC-BIKE-GAME.mp3')
+    commentsAudio = new Audio('./sounds/COMMENTS-BIKE-GAME.mp3')
+    ambientAudio = new Audio('./sounds/AMBIENT-BIKE-GAME.mp3')      
   }
 // DIBUJAR FONDO
   const drawLandScape = ()=>{
