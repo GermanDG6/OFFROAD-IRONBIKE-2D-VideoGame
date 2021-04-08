@@ -21,6 +21,7 @@
   ![Arrows-Keys](https://w7.pngwing.com/pngs/83/537/png-transparent-computer-keyboard-arrow-keys-computer-icons-page-up-and-page-down-keys-arrow-text-rectangle-logo-thumbnail.png)
   
   Puedes probarlo haciendo **click** en el siguiente enlace: [OFFROAD IRONBIKE MTB](https://offroad-ironbike-mtb.netlify.app/)
+  Hay que tener en cuenta que actualmente está diseñado solo para pantallas de 60hz de frecuencia de muestreo.
   
 ## Comenzando 🚀
 
