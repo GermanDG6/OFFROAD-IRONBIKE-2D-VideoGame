@@ -3,10 +3,11 @@
     src: url('/styles/VehicleBreaksDown-Regular.ttf');
     font-size: 120px;
 }
+body, html{
+    height: 100vh;
+}
 .section-down{
-    position: fixed;
     width: 100vw;
-    height: 90vh;
 }
 .background{
     padding-bottom: 2%;
@@ -17,7 +18,6 @@
 
 .game-title{
     margin: auto;
-    height: 10vh;
     width: 100vh;
     font-family: myFont ;
     color: rgb(196, 104, 0); 
@@ -34,15 +34,15 @@
     text-align: center;
 }
 #canvas{
-    margin: 30px;
+    margin-top: 10px;
     border: 1px solid rgba(71, 31, 15, 0.74)
 }
 
 .all-buttons{
     display:flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-around;
 }
 .buttons{    
     font-family: MyFont;
@@ -68,7 +68,9 @@ h5{
     align-items: center;
 }
 #countdown{
-    background-color: rgba(0, 0, 0, 0.452);
+    border-radius: 15%;
+    padding:3px;
+    background-color: rgba(87, 49, 22, 0.726);
 }
 
 #modal{

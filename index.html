@@ -9,18 +9,6 @@
     <link rel="stylesheet" href="./styles/styles.css">
 </head>
 <body>
-  <div class="game-title">
-         <h1>OFFROAD IRONBIKE MTB</h1>
-        <a href="https://github.com/GermanDG6"><h6>BY GERMAN DG</h6></a>
-  </div>
-  <div class="section-down">
-    <div class="background">
-  <div id="time-out">
-    <span id="countdown"></span>
-  </div>
-  <div id="modal">
-    <button type="button" class="btn buttons btn-outline-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop">INSTRUCTIONS</button>
-  </div>
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -51,16 +39,24 @@
       </div>
     </div>
   </div>
-  <div class="game">
-    <canvas id="canvas" width="1200" height="500"></canvas>
+  <div class="game-title">
+         <h1>OFFROAD IRONBIKE MTB</h1>
+        <a href="https://github.com/GermanDG6"><h6>BY GERMAN DG</h6></a>
   </div>
-  <div class="all-buttons">
-    <div>
-      <div class="game-settings">
-        <button type="button"  id="start-button" class="btn buttons btn-outline-light">START GAME</button>
-        <button type="button"  id="reload-button" class="btn buttons btn-outline-light">RESTART</button>
-      </div>
-    </div>
+  <div class="section-down">
+    <div class="background">
+      <div class="all-buttons">
+        
+        <div class="game-settings">
+          <button type="button"  id="start-button" class="btn buttons btn-outline-light">START GAME</button>
+          <button type="button"  id="reload-button" class="btn buttons btn-outline-light">RESTART</button>
+          <button type="button" class="btn buttons btn-outline-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop">INSTRUCTIONS</button>
+        </div>
+        
+        <div id="time-out">
+          <span id="countdown"></span>
+        </div>
+        
     <div class="audio-settings" >
       <h5>AUDIO CONTROLS</h5>
       <div class="btn-group buttons " role="group" aria-label="Basic checkbox toggle button group">
@@ -80,12 +76,16 @@
       </div>
     </div>
   </div>
+  <div class="game">
+    <canvas id="canvas" width="1200" height="500"></canvas>
+  </div>
     </div>
   </div>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
-    <script src="./js/classes.js"></script>
-    <script src="./js/dommanipulaition.js"></script>
-    <script src="./js/logic.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+
+  <script src="./js/classes.js"></script>
+  <script src="./js/dommanipulaition.js"></script>
+  <script src="./js/logic.js"></script>
 </body>
 </html>
