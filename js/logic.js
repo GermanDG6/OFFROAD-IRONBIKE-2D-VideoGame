@@ -4,7 +4,7 @@ const ctx = canvas.getContext('2d')
 
 let loadedAllImages = false
 const loadedImages = {} 
-const listOfUrls = {landScape:'./images/landscape.jpg' ,bike:'./images/klipartz-baja-resolucion.png',bikejump:'./images/png bike.png',bike2:'./images/bici dh plana-baja-resolucion.png',bikejump2:'./images/bici dh vuelta copia-baja-resolucion.png' ,obstacle:'./images/klipartz.com (1).png',obstacle2:'./images/tronco1.png',obstacle3:'./images/tronco2.png',obstacle4:'./images/fogata.png',obstacle5:'./images/valla-1.png'}  
+const listOfUrls = {landScape:'./images/landscape.jpg' ,bike:'./images/klipartz-baja-resolucion.png',bikejump:'./images/bike-jump.png',bike2:'./images/bike-dh-low-resolution.png',bikejump2:'./images/bike-dh-jump-low-resolution.png' ,obstacle:'./images/stone.png',obstacle2:'./images/tronco1.png',obstacle3:'./images/tronco2.png',obstacle4:'./images/fogata.png',obstacle5:'./images/valla-1.png'}  
 
 let counterForLoadedImages = 0
     
