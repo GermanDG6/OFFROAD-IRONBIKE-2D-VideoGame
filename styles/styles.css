@@ -3,10 +3,13 @@
     src: url('/styles/VehicleBreaksDown-Regular.ttf');
     font-size: 120px;
 }
-
-.background{
+.section-down{
+    position: fixed;
     width: 100vw;
     height: 90vh;
+}
+.background{
+    padding-bottom: 2%;
     background-image: url('/images/background-img3-baja-resolucion.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -69,8 +72,8 @@ h5{
 }
 
 #modal{
-display: flex;
-justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 .modal-title{
     font-size:35px;

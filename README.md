@@ -1,8 +1,8 @@
 # OFFROAD IRONBIKE MTB 
 
-  Mi primer proyecto como desarollador web. Ha sido creado mientras cursaba mi 3ª semana en el bootcamp Ironhack en remoto. Aún esta sujeto a mejoras.
+  Mi primer proyecto personal como desarollador web. Ha sido creado mientras cursaba mi 3ª semana en el bootcamp Ironhack en remoto. Aún esta sujeto a mejoras.
 
-## Tecnologías 
+## Tecnologías
 - JavaScript
 - HTML + canvas
 - CSS
@@ -44,6 +44,6 @@ Este proyecto no está sujeto a licencia.
 * Da las gracias públicamente 🤓
 
 ---
-⌨️ con ❤️ por [German DG](https://github.com/GermanDG6) #Ironhacker 😊
+⌨️ con ❤️ por [German DG](https://www.linkedin.com/in/germandelgadogarcia/) #Ironhacker 😊
 
   
