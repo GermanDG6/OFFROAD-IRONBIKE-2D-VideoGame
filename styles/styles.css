@@ -10,7 +10,7 @@ body, html{
     width: 100vw;
 }
 .background{
-    padding-bottom: 2%;
+    padding-bottom: 11.5%;
     background-image: url('/images/background-img3-baja-resolucion.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -62,7 +62,6 @@ h5{
     color:whitesmoke;
     font-family: MyFont;
     font-size: 30px;
-    height: 8vh;
     display:flex;
     justify-content: center;
     align-items: center;
